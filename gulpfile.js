@@ -2,13 +2,16 @@ var gulp = require( 'gulp' );
 var rename = require( 'gulp-rename' );
 var browserify = require( 'browserify' );
 var browserifyInc = require( 'browserify-incremental' );
+var reactify = require( 'reactify' );
 var xtend = require( 'xtend' );
 var source = require( 'vinyl-source-stream' );
 var server = require( 'gulp-express' );
 
 gulp.task( 'browserify', function () {
 	var bundler = browserify( xtend( browserifyInc.args, {
-		entries: [ './src/client/index.js' ],
+		entries: [ './src/client/index.jsx' ],
+		extensions: [ '.jsx' ],
+		transform: [ reactify ],
 		debug: true
 	} ) );
 	return bundler.bundle()

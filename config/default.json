@@ -1,5 +1,6 @@
 {
 	"app": {
+		"host": "http://localhost",
 		"port": 2919
 	}
 }

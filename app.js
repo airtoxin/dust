@@ -12,5 +12,6 @@ app.get( '/', function ( req, res ) {
 } );
 
 http.listen( config.app.port, function () {
-	console.log( 'port listening on ' + config.app.port );
+	console.log( 'app run on' );
+	console.log( config.app.host + ':' + config.app.port );
 } );
