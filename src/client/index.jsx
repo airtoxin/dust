@@ -6,6 +6,9 @@
 	window.addEventListener( 'load', function () {
 		var server = config.app.host + ':' + config.app.port;
 		var socket = window.io( server );
-		React.render( <App />, document.body );
+
+		socket.on( 'update', function ( data ) {
+			React.render( <App data={data}/>, document.body );
+		} );
 	} );
 }() );
