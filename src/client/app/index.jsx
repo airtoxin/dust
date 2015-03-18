@@ -1,40 +1,47 @@
-var config = require( '../../../config/default' ).world;
+var _ = require( 'lodash' );
 var React = require( 'react' );
 var ReactCanvas = require( 'react-canvas' );
 
 var Surface = ReactCanvas.Surface;
-var Image = ReactCanvas.Image;
 var Text = ReactCanvas.Text;
 
 var App = React.createClass( {
 	propTypes: {
 		data: React.PropTypes.object.isRequired
 	},
+	getInitialState: function () {
+		return {
+			clickCount: 0
+		};
+	},
 	render: function () {
 		var self = this;
-		var date = new Date( this.props.data.date ).toString();
+		var d = this.props.data;
+		var circles = _.map( d.dusts, function ( dust ) {
+			return (
+				<circle
+					cx={dust.x}
+					cy={dust.y}
+					r={1}
+					key={dust.id}
+					onClick={self.handleClickDust}
+				/>
+			);
+		} );
 		return (
-			<Surface
-				width={config.width}
-				height={config.height}
-				left={0}
-				top={0}
-			>
-				<Text style={self.getTextStyle()}>
-					{''+this.props.data.date}
-				</Text>
-			</Surface>
+			<div>
+				<h1 style={{position:'absolute'}}>Clicks: {this.state.clickCount}</h1>
+				<svg width={d.width} height={d.height}>
+					{circles}
+				</svg>
+			</div>
 		);
 	},
-	getTextStyle: function () {
-		return {
-			top: 250,
-			left: 0,
-			width: config.width,
-			height: config.height,
-			lineHeight: 20,
-			fontSize: 22
-		};
+	handleClickDust: function () {
+		console.log("@this.state.clickCount:", this.state.clickCount);
+		this.setState( {
+			clickCount: this.state.clickCount + 1
+		} );
 	}
 } );
 
