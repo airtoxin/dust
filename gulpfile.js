@@ -14,6 +14,7 @@ gulp.task( 'browserify', function () {
 		transform: [ reactify ],
 		debug: true
 	} ) );
+	browserifyInc( bundler, { cacheFile: './browserify-cache.json' } );
 	return bundler.bundle()
 		.pipe( source( 'main.js' ) )
 		.pipe( gulp.dest( 'public/js' ) );

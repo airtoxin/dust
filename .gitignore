@@ -32,3 +32,5 @@ node_modules
 # Created by https://www.gitignore.io
 
 public
+browserify-cache.json
+
